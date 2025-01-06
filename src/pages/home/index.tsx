@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { PokemonCard } from '../../components/PokemonCard';
 
 import { db } from '../../services/firebaseconnection';
 import { getDocs, collection, orderBy, query } from 'firebase/firestore';
@@ -43,15 +45,29 @@ export function Home() {
     }, [])
 
     return (
-        <>
-            <h1>Hello Kanto!</h1>
-            <ol>
-                {pokemonsList.map((pokemon) => (
-                    <li>
-                        {pokemon.nome}
-                    </li>
-                ))}
-            </ol>
-        </>
+        <div>
+            <ul className="card-wrapper">
+                <div className="loading-banner"></div>
+                <h2>Olá! Você encontrará abaixo uma lista com os Pokémons descobertos na região de Kanto! Você pode clicar em seus cards para ver mais informações!</h2>
+                    {pokemonsList.map((pokemon) => {
+                        if (pokemon.id <=12) {
+
+                            return (
+                                <Link to={`/pokemon/${pokemon.id}`}>
+                                    <li key={pokemon.id}>
+                                    <PokemonCard                   
+                                        pokeNome={pokemon.nome} 
+                                        pokeNumero={pokemon.id} 
+                                        pokeTipo1={`${pokemon.tipo1}`}
+                                        pokeTipo2={`${pokemon.tipo2}`}
+                                    />
+                                    </li>
+                                </Link>
+                            )
+                            
+                        }
+                    })}
+            </ul>
+      </div>
     )
 }
