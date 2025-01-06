@@ -46,7 +46,7 @@ export function Home() {
     }, [])
 
     return (
-        <div>
+        <main className="container">
             <ul className="card-wrapper">
                 <div className="loading-banner"></div>
                 <h2>Olá! Você encontrará abaixo uma lista com os Pokémons descobertos na região de Kanto! Você pode clicar em seus cards para ver mais informações!</h2>
@@ -69,6 +69,6 @@ export function Home() {
                         }
                     })}
             </ul>
-      </div>
+      </main>
     )
 }
