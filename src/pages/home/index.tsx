@@ -6,15 +6,9 @@ import { PokemonCard } from '../../components/PokemonCard';
 import { db } from '../../services/firebaseconnection';
 import { getDocs, collection, orderBy, query } from 'firebase/firestore';
 
-import slugify from 'slugify';
+import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
 
-interface IPokemonsProps {
-    id: number;
-    nome: string;
-    tipo1: string;
-    tipo2: string | null;
-    descricao: string;
-}
+import slugify from 'slugify';
 
 export function Home() {
 
@@ -40,7 +34,6 @@ export function Home() {
                 })
                 setPokemonsList(...[pokemon]);
             })
-
         }
         loadPokemons();
     }, [])
@@ -57,10 +50,10 @@ export function Home() {
                                 <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
                                     <li>
                                     <PokemonCard                   
-                                        pokeNome={pokemon.nome} 
-                                        pokeNumero={pokemon.id} 
-                                        pokeTipo1={slugify(`${pokemon.tipo1}`, { lower: true, strict: true })}
-                                        pokeTipo2={slugify(`${pokemon.tipo2}`, { lower: true, strict: true })}
+                                        nome={pokemon.nome} 
+                                        id={pokemon.id} 
+                                        tipo1={slugify(`${pokemon.tipo1}`, { lower: true, strict: true })}
+                                        tipo2={slugify(`${pokemon.tipo2}`, { lower: true, strict: true })}
                                     />
                                     </li>
                                 </Link>
