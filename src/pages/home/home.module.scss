@@ -1,0 +1,191 @@
+.card-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 110rem;
+    padding: 1rem;
+    gap: 1.5rem;
+    margin-top: 4.5rem;
+  
+    h2 {
+      padding: 1.5rem;
+      color: #fcfcfc;
+      font-size: 1.6rem;
+      text-align: justify;
+    }
+  
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 32.5rem;
+      height: 8.5rem;
+      border-radius: 1rem;
+      list-style: none;
+      cursor: pointer;
+      box-shadow: 0.05rem 0.05rem #000000;
+  
+      background: #4f4f4f;
+      position: relative;
+  
+      &:hover {
+        transform: scale(1.025);
+        transition: all 0.2s ease;
+      }
+  
+      .pokeball-bg {
+        height: 6.5rem;
+        width: 6.5rem;
+        background-image: url("../assets/images/icons/ipokeball.svg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        transform: rotate(30deg);
+        opacity: 0.1;
+        position: absolute;
+        right: 0.1rem;
+        bottom: 0.1rem;
+      }
+    }
+  }
+  
+  .loading-banner {
+    width: 100vw;
+    height: 100vh;
+    z-index: 88;
+    background-image: url("../assets/images/icons/irefresh.svg");
+    background-size: 4rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: none;
+  }
+  
+  .loading-banner.visible {
+    display: flex;
+    animation-name: loadingEffect;
+    animation-duration: 1s;
+    animation-iteration-count: 6;
+    position: absolute;
+    top: 0;
+  }
+  
+  .poke-wrapper {
+    font-size: 2.4rem;
+    color: #fcfcfc;
+    padding: 1rem 1.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5.5rem;
+    height: 100%;
+    width: 100%;
+  
+    span {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-shadow: 0.07rem 0.07rem #000000;
+    }
+  
+    > img {
+      // margin-right: 20%;
+      width: 5rem;
+    }
+  }
+  
+  .pokeTypes {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    span {
+      font-size: 1.4rem;
+    }
+  
+    .poke-num-fixed {
+      position: absolute;
+      top: 0.3rem;
+      right: 2rem;
+    }
+  
+    img {
+      max-width: 2rem;
+      padding: 0.2rem;
+      border-radius: 50%;
+  
+      &.normal {
+        background: $normal;
+      }
+      &.fogo {
+        background: $fogo;
+      }
+      &.agua {
+        background: $agua;
+      }
+      &.eletrico {
+        background: $eletrico;
+      }
+      &.grama {
+        background: $grama;
+      }
+      &.gelo {
+        background: $gelo;
+      }
+      &.lutador {
+        background: $lutador;
+      }
+      &.venenoso {
+        background: $venenoso;
+      }
+      &.terrestre {
+        background: $terrestre;
+      }
+      &.voador {
+        background: $voador;
+      }
+      &.psiquico {
+        background: $psiquico;
+      }
+      &.inseto {
+        background: $inseto;
+      }
+      &.pedra {
+        background: $pedra;
+      }
+      &.fantasma {
+        background: $fantasma;
+      }
+      &.dragao {
+        background: $dragao;
+      }
+      &.noturno {
+        background: $noturno;
+      }
+      &.aco {
+        background: $aco;
+      }
+    }
+  }
+  
+  header {
+    height: 4.5rem;
+    width: 110%;
+    padding: 0.5rem;
+    background: #ee1515;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+  
+    > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 2.4rem;
+      color: #fcfcfc;
+      font-weight: bold;
+    }
+  }
+  
