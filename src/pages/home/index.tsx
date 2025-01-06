@@ -6,6 +6,7 @@ import { PokemonCard } from '../../components/PokemonCard';
 import { db } from '../../services/firebaseconnection';
 import { getDocs, collection, orderBy, query } from 'firebase/firestore';
 
+import slugify from 'slugify';
 
 interface IPokemonsProps {
     id: number;
@@ -53,18 +54,18 @@ export function Home() {
                         if (pokemon.id <=12) {
 
                             return (
-                                <Link to={`/pokemon/${pokemon.id}`}>
-                                    <li key={pokemon.id}>
+                                <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+                                    <li>
                                     <PokemonCard                   
                                         pokeNome={pokemon.nome} 
                                         pokeNumero={pokemon.id} 
-                                        pokeTipo1={`${pokemon.tipo1}`}
-                                        pokeTipo2={`${pokemon.tipo2}`}
+                                        pokeTipo1={slugify(`${pokemon.tipo1}`, { lower: true, strict: true })}
+                                        pokeTipo2={slugify(`${pokemon.tipo2}`, { lower: true, strict: true })}
                                     />
                                     </li>
                                 </Link>
                             )
-                            
+
                         }
                     })}
             </ul>
