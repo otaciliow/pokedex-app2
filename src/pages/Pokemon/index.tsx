@@ -8,10 +8,6 @@ import slugify from 'slugify';
 
 import returnIcon from '../../assets/images/icons/ireturn.svg';
 
-import venusaurImg from '../../assets/images/pokemons/1.gif'
-import grassIcon from '../../assets/images/tipos/grama.svg';
-import poisonIcon from '../../assets/images/tipos/venenoso.svg';
-
 export function Pokemon() {
 
     const pokemonParams = useParams();
@@ -57,20 +53,15 @@ export function Pokemon() {
                         <span>{`# ${numeroPokemon}`}</span>
                         <span>{nomePokemon}</span>
                         <div className="pokeTypes">
-                        {/* <img src={`./assets/images/tipos/${slugify(`${tipoPokemon1}`, { lower: true, strict: true })}.svg`} alt={`Icone de tipo ${slugify(`${tipoPokemon1}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon1}`, { lower: true, strict: true })} /> */}
-                        <img src={grassIcon} alt={`Icone de tipo ${slugify(`${tipoPokemon1}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon1}`, { lower: true, strict: true })} />
+                        <img src={`../../assets/images/tipos/${slugify(`${tipoPokemon1}`, { lower: true, strict: true })}.svg`} alt={`Icone de tipo ${slugify(`${tipoPokemon1}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon1}`, { lower: true, strict: true })} />
                         {(tipoPokemon2 !== null) ? (
-                            // <img src={`./assets/images/tipos/${slugify(`${tipoPokemon2}`, { lower: true, strict: true })}.svg`} alt={`Icone de tipo ${slugify(`${tipoPokemon2}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon2}`, { lower: true, strict: true })} />
-                            <img src={poisonIcon} alt={`Icone de tipo ${slugify(`${tipoPokemon2}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon2}`, { lower: true, strict: true })} />
-                        ) : (
-                        <></>
-                        )}
+                            <img src={`../../assets/images/tipos/${slugify(`${tipoPokemon2}`, { lower: true, strict: true })}.svg`} alt={`Icone de tipo ${slugify(`${tipoPokemon2}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon2}`, { lower: true, strict: true })} />
+                        ) : (<></>)}
                     </div>
                     </div>
                 </div>
                 <div className="pokeSprite">
-                    {/* <img src={`./assets/images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} /> */}
-                    <img src={venusaurImg} alt={`Imagem de um ${nomePokemon}`} />
+                    <img src={`../assets/../images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
                 </div>
                 <div className="pokeTypesNames">
                     <span>Tipo(s):&nbsp;</span>
