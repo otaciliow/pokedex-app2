@@ -16,6 +16,8 @@ export function Pokemon() {
 
     const pokemonParams = useParams();
 
+    const [isLoading, setIsLoading] = useState(true);
+
     const [numeroPokemon, setNumeroPokemon] = useState("");
     const [nomePokemon, setNomePokemon] = useState("");
     const [tipoPokemon1, setTipoPokemon1] = useState("");
@@ -38,7 +40,7 @@ export function Pokemon() {
             .catch(e => {
                 console.log(`Pokémon não encontrado... Erro: ${e}`)
             })
-
+            setIsLoading(false);
         }
         loadPokemon()
     }, [])
@@ -46,7 +48,7 @@ export function Pokemon() {
     return (
         <main className="container">
             <div className="pokemon-page-wrapper">
-                <div className="loading-banner"></div>
+                <div className={`loading-banner${isLoading ? ' visible' : '' }`}></div>
                 <div className="pokeDescHeader">
                     <Link to="/">
                         <img src={returnIcon} alt="Ícone de retorno" />
