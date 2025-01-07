@@ -33,7 +33,7 @@ body {
 }
 
 // Estilização da página Pokedex
-@import "./pages/Home/home.module.scss";
+@import "./home.scss";
 
 // Estilização da página Pokemon
-@import "./pages/Pokemon/pokemon.module.scss";
+@import "./pokemon.scss";
