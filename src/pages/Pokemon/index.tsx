@@ -8,6 +8,7 @@ import slugify from 'slugify';
 
 import returnIcon from '../../assets/images/icons/ireturn.svg';
 import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
+import { LoadingBanner } from '../../components/LoadingBanner';
 
 export function Pokemon() {
 
@@ -64,7 +65,7 @@ export function Pokemon() {
     return (
         <main className="container">
             <div className="pokemon-page-wrapper">
-                <div className={`loading-banner${isLoading ? ' visible' : '' }`}></div>
+                <LoadingBanner status={isLoading} />
                 <div className="pokeDescHeader">
                     <Link to="/">
                         <img src={returnIcon} alt="Ícone de retorno" />

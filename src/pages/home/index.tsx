@@ -9,6 +9,7 @@ import { getDocs, collection, orderBy, query, limit } from 'firebase/firestore';
 import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
 
 import slugify from 'slugify';
+import { LoadingBanner } from '../../components/LoadingBanner';
 
 export function Home() {
 
@@ -68,23 +69,23 @@ export function Home() {
 
     return (
         <main className="container">
+            <h2>Olá! Você encontrará abaixo uma lista com os Pokémons descobertos na região de Kanto! Você pode clicar em seus cards para ver mais informações!</h2>
             <ul className="card-wrapper">
-                <div className={`loading-banner${isLoading ? ' visible' : '' }`}></div>
-                <h2>Olá! Você encontrará abaixo uma lista com os Pokémons descobertos na região de Kanto! Você pode clicar em seus cards para ver mais informações!</h2>
-                    {pokemonsList.map((pokemon) => {
-                        return (
-                            <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
-                                <li>
-                                <PokemonCard                   
-                                    nome={pokemon.nome}
-                                    id={pokemon.id} 
-                                    tipo1={slugify(`${pokemon.tipo1}`, { lower: true, strict: true })}
-                                    tipo2={slugify(`${pokemon.tipo2}`, { lower: true, strict: true })}
-                                />
-                                </li>
-                            </Link>
-                        )
-                    })}
+                <LoadingBanner status={isLoading} />
+                {pokemonsList.map((pokemon) => {
+                    return (
+                        <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+                            <li>
+                            <PokemonCard                   
+                                nome={pokemon.nome}
+                                id={pokemon.id} 
+                                tipo1={slugify(`${pokemon.tipo1}`, { lower: true, strict: true })}
+                                tipo2={slugify(`${pokemon.tipo2}`, { lower: true, strict: true })}
+                            />
+                            </li>
+                        </Link>
+                    )
+                })}
             </ul>
             { pokemonsLimit < 152 && 
                 <button onClick={handleLoadMore}>Ver mais</button>
