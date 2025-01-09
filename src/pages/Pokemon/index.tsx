@@ -7,6 +7,7 @@ import { db } from '../../services/firebaseconnection';
 import slugify from 'slugify';
 
 import returnIcon from '../../assets/images/icons/ireturn.svg';
+import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
 
 export function Pokemon() {
 
@@ -19,18 +20,38 @@ export function Pokemon() {
     const [tipoPokemon1, setTipoPokemon1] = useState("");
     const [tipoPokemon2, setTipoPokemon2] = useState("");
     const [descricaoPokemon, setDescricaoPokemon] = useState("");
+
+    const [nomeTipoSlug1, setNomeTipoSlug1] = useState("");
+    const [nomeTipoSlug2, setNomeTipoSlug2] = useState("");
     
     useEffect(() =>{
+        const fetchedPokemon = sessionStorage.getItem('@pokedex-app');
+
+        function setPokemonInfos(pokemon: IPokemonsProps) {
+            setNumeroPokemon(pokemon.id.toString());
+            setNomePokemon(pokemon.nome);
+            setTipoPokemon1(pokemon.tipo1);
+            setNomeTipoSlug1(slugify(`${pokemon.tipo1}`, { lower: true, strict: true }));
+            setTipoPokemon2(pokemon.tipo2 ? pokemon.tipo2 : '');
+            setNomeTipoSlug2(slugify(`${pokemon.tipo2}`, { lower: true, strict: true }))
+            setDescricaoPokemon(pokemon.descricao ? pokemon.descricao : '');
+        }
+
+        if (fetchedPokemon) {
+            let pokemons = JSON.parse(fetchedPokemon);
+            let targetPokemon: IPokemonsProps =  pokemons.find((obj: IPokemonsProps) => Number(obj.id) === Number(pokemonParams.id));
+            setPokemonInfos(targetPokemon);
+            setIsLoading(false);
+        } else {
+            loadPokemon()
+        }
+        
         function loadPokemon() {
             const docRef = doc(db, 'Kanto', `${pokemonParams.id}`);
             getDoc(docRef)
             .then((snapshot) => {
                 if (snapshot.data() !== undefined) {
-                    setNumeroPokemon(snapshot.data()?.id);
-                    setNomePokemon(snapshot.data()?.nome);
-                    setTipoPokemon1(snapshot.data()?.tipo1);
-                    setTipoPokemon2(snapshot.data()?.tipo2);
-                    setDescricaoPokemon(snapshot.data()?.descricao);
+                    setPokemonInfos(snapshot.data() as IPokemonsProps);
                 }
             })
             .catch(e => {
@@ -38,7 +59,6 @@ export function Pokemon() {
             })
             setIsLoading(false);
         }
-        loadPokemon()
     }, [])
 
     return (
@@ -53,20 +73,22 @@ export function Pokemon() {
                         <span>{`# ${numeroPokemon}`}</span>
                         <span>{nomePokemon}</span>
                         <div className="pokeTypes">
-                        <img src={`../../assets/images/tipos/${slugify(`${tipoPokemon1}`, { lower: true, strict: true })}.svg`} alt={`Icone de tipo ${slugify(`${tipoPokemon1}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon1}`, { lower: true, strict: true })} />
-                        {(tipoPokemon2 !== null) ? (
-                            <img src={`../../assets/images/tipos/${slugify(`${tipoPokemon2}`, { lower: true, strict: true })}.svg`} alt={`Icone de tipo ${slugify(`${tipoPokemon2}`, { lower: true, strict: true })}`} className={slugify(`${tipoPokemon2}`, { lower: true, strict: true })} />
-                        ) : (<></>)}
+                        { nomeTipoSlug1 && nomeTipoSlug2 &&
+                        <img src={`/assets/images/tipos/${nomeTipoSlug1}.svg`} alt={`Icone de tipo ${nomeTipoSlug1}`} className={`${nomeTipoSlug1}`} />
+                        }
+                        { (tipoPokemon2 !== '') ? (
+                            <img src={`/assets/images/tipos/${nomeTipoSlug2}.svg`} alt={`Icone de tipo ${nomeTipoSlug2}`} className={`${nomeTipoSlug2}`} />
+                        ) : (<></>) }
                     </div>
                     </div>
                 </div>
                 <div className="pokeSprite">
-                    <img src={`../assets/../images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
+                    <img src={`/assets/images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
                 </div>
                 <div className="pokeTypesNames">
                     <span>Tipo(s):&nbsp;</span>
                     <span>{tipoPokemon1}</span>
-                    {(tipoPokemon2 !== null) ? (
+                    {(tipoPokemon2 !== '') ? (
                         <span> / {tipoPokemon2}</span>
                     ) : (<></>)}
                 </div>
