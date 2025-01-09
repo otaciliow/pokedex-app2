@@ -224,3 +224,17 @@ $fada: #d685ad;
     }
   }
   
+  .load-more-button {
+    font-size: 1.8rem;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0.07rem 0.07rem #000000;
+    transition: all .2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      transition: all .2s ease;
+    }
+  }
