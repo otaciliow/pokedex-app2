@@ -16,6 +16,14 @@ export function Home() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        const fetchedPokemon = sessionStorage.getItem('@pokedex-app');
+
+        if (fetchedPokemon) {
+            setPokemonsList(JSON.parse(...[fetchedPokemon]));
+            setIsLoading(false);
+        } else {
+            loadPokemons();
+        }
         function loadPokemons() {
 
             const listRef = collection(db, 'Kanto');
@@ -35,10 +43,10 @@ export function Home() {
                     })
                 })
                 setPokemonsList(...[pokemon]);
+                sessionStorage.setItem('@pokedex-app', JSON.stringify(pokemon));
             })
             setIsLoading(false);
         }
-        loadPokemons();
     }, [])
 
     return (
@@ -51,7 +59,7 @@ export function Home() {
                             <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
                                 <li>
                                 <PokemonCard                   
-                                    nome={pokemon.nome} 
+                                    nome={pokemon.nome}
                                     id={pokemon.id} 
                                     tipo1={slugify(`${pokemon.tipo1}`, { lower: true, strict: true })}
                                     tipo2={slugify(`${pokemon.tipo2}`, { lower: true, strict: true })}
