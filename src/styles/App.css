@@ -214,6 +214,20 @@ header > span {
   font-weight: bold;
 }
 
+.load-more-button {
+  font-size: 1.8rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0.07rem 0.07rem #000000;
+  transition: all 0.2s ease;
+}
+.load-more-button:hover {
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
 .pokemon-page-wrapper {
   display: flex;
   align-items: center;

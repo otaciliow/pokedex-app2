@@ -88,7 +88,7 @@ export function Home() {
                 })}
             </ul>
             { pokemonsLimit < 152 && 
-                <button onClick={handleLoadMore}>Ver mais</button>
+                <button className="load-more-button" onClick={handleLoadMore}>Ver mais</button>
             }
       </main>
     )
