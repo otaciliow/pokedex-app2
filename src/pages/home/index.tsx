@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { PokemonCard } from '../../components/PokemonCard';
 
 import { db } from '../../services/firebaseconnection';
-import { getDocs, collection, orderBy, query } from 'firebase/firestore';
+import { getDocs, collection, orderBy, query, limit } from 'firebase/firestore';
 
 import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
 
@@ -12,8 +12,16 @@ import slugify from 'slugify';
 
 export function Home() {
 
+    let pokedexInitialLimit = Number(sessionStorage.getItem('@pokedex-app-limit'));
+    
     const [pokemonsList, setPokemonsList] = useState<IPokemonsProps[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [pokemonsLimit, setPokemonsLimit] = useState(Number(pokedexInitialLimit));
+    
+    if (!pokedexInitialLimit) {
+        setPokemonsLimit(12);
+        sessionStorage.setItem('@pokedex-app-limit', pokemonsLimit.toString());
+    }
 
     useEffect(() => {
         const fetchedPokemon = sessionStorage.getItem('@pokedex-app');
@@ -27,7 +35,7 @@ export function Home() {
         function loadPokemons() {
 
             const listRef = collection(db, 'Kanto');
-            const queryRef = query(listRef, orderBy('id', 'asc'));
+            const queryRef = query(listRef, orderBy('id', 'asc'), limit(Number(pokemonsLimit)));
     
             getDocs(queryRef)
             .then((snapshot) => {
@@ -44,10 +52,19 @@ export function Home() {
                 })
                 setPokemonsList(...[pokemon]);
                 sessionStorage.setItem('@pokedex-app', JSON.stringify(pokemon));
+                sessionStorage.setItem('@pokedex-app-limit', pokemonsLimit.toString());
             })
-            setIsLoading(false);
+            .then(() => {
+                setIsLoading(false);
+            })
         }
-    }, [])
+    }, [pokemonsLimit])
+
+    function handleLoadMore() {
+        sessionStorage.removeItem('@pokedex-app');
+        setIsLoading(true);
+        setPokemonsLimit(pokemonsLimit + 12);
+    }
 
     return (
         <main className="container">
@@ -69,6 +86,9 @@ export function Home() {
                         )
                     })}
             </ul>
+            { pokemonsLimit < 152 && 
+                <button onClick={handleLoadMore}>Ver mais</button>
+            }
       </main>
     )
 }
