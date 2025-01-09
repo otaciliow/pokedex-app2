@@ -74,16 +74,16 @@ export function Pokemon() {
                         <span>{nomePokemon}</span>
                         <div className="pokeTypes">
                         { nomeTipoSlug1 && nomeTipoSlug2 &&
-                        <img src={`/assets/images/tipos/${nomeTipoSlug1}.svg`} alt={`Icone de tipo ${nomeTipoSlug1}`} className={`${nomeTipoSlug1}`} />
+                        <img src={`/images/tipos/${nomeTipoSlug1}.svg`} alt={`Icone de tipo ${nomeTipoSlug1}`} className={`${nomeTipoSlug1}`} />
                         }
                         { (tipoPokemon2 !== '') ? (
-                            <img src={`/assets/images/tipos/${nomeTipoSlug2}.svg`} alt={`Icone de tipo ${nomeTipoSlug2}`} className={`${nomeTipoSlug2}`} />
+                            <img src={`/images/tipos/${nomeTipoSlug2}.svg`} alt={`Icone de tipo ${nomeTipoSlug2}`} className={`${nomeTipoSlug2}`} />
                         ) : (<></>) }
                     </div>
                     </div>
                 </div>
                 <div className="pokeSprite">
-                    <img src={`/assets/images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
+                    <img src={`/images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
                 </div>
                 <div className="pokeTypesNames">
                     <span>Tipo(s):&nbsp;</span>
