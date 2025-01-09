@@ -9,13 +9,13 @@ export function PokemonCard(props: IPokemonsProps) {
 
         return(            
         <div className={`poke-wrapper ${pokeTipo1}`}>
-            <img src={`/assets/images/pokemons/${pokeNum}.gif`} alt={`Imagem de um ${pokemon}`} />
+            <img src={`/images/pokemons/${pokeNum}.gif`} alt={`Imagem de um ${pokemon}`} />
             <div className="pokeInfos">
                 <span>{pokemon}</span>
                 <div className="pokeTypes">
-                    <img src={`/assets/images/tipos/${pokeTipo1}.svg`} alt={`Icone de tipo ${pokeTipo1}`} className={`${pokeTipo1}`} />
+                    <img src={`/images/tipos/${pokeTipo1}.svg`} alt={`Icone de tipo ${pokeTipo1}`} className={`${pokeTipo1}`} />
                     {pokeTipo2 !== "null" && (
-                            <img src={`/assets/images/tipos/${pokeTipo2}.svg`} alt={`Icone de tipo ${pokeTipo2}`} className={`${pokeTipo2}`} />
+                            <img src={`/images/tipos/${pokeTipo2}.svg`} alt={`Icone de tipo ${pokeTipo2}`} className={`${pokeTipo2}`} />
                         )
                     }
                     <span className="poke-num-fixed">{`# ${pokeNum}`}</span>
