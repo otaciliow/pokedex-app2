@@ -20,7 +20,7 @@ export function Home() {
     const [pokemonsLimit, setPokemonsLimit] = useState(Number(pokedexInitialLimit));
     
     if (!pokedexInitialLimit) {
-        setPokemonsLimit(12);
+        setPokemonsLimit(9);
         sessionStorage.setItem('@pokedex-app-limit', pokemonsLimit.toString());
     }
 
@@ -64,7 +64,7 @@ export function Home() {
     function handleLoadMore() {
         sessionStorage.removeItem('@pokedex-app');
         setIsLoading(true);
-        setPokemonsLimit(pokemonsLimit + 12);
+        setPokemonsLimit(pokemonsLimit + 9);
     }
 
     return (
