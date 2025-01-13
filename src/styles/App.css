@@ -274,14 +274,13 @@ header > span {
   font-weight: bold;
 }
 .pokeDescHeader .pokeInfo span + span {
-  font-size: 2.6rem;
+  font-size: 3.2rem;
 }
 .pokeDescHeader .pokeTypes {
-  max-width: 5.5rem;
   margin-top: 0.2rem;
 }
 .pokeDescHeader .pokeTypes img {
-  max-width: 2rem;
+  max-width: 2.6rem;
   border-radius: 50%;
 }
 
@@ -290,7 +289,7 @@ header > span {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
 }
 .pokeSprite img {
   width: 12.5rem;
