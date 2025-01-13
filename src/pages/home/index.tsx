@@ -21,7 +21,7 @@ export function Home() {
     
     if (!pokedexInitialLimit) {
         setPokemonsLimit(9);
-        sessionStorage.setItem('@pokedex-app-limit', pokemonsLimit.toString());
+        sessionStorage.setItem('@pokedex-app-limit', `${pokemonsLimit}`);
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ export function Home() {
                 })
                 setPokemonsList(...[pokemon]);
                 sessionStorage.setItem('@pokedex-app', JSON.stringify(pokemon));
-                sessionStorage.setItem('@pokedex-app-limit', pokemonsLimit.toString());
+                sessionStorage.setItem('@pokedex-app-limit', `${pokemonsLimit}`);
             })
             .then(() => {
                 setIsLoading(false);
