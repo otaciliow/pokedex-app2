@@ -100,13 +100,13 @@ export function Pokemon() {
                 <div className="pokeSprite">
 
                     <Link to={`/pokemon/${Number(numeroPokemon)-1}`} style={{ pointerEvents: !allowPrevNavigation ? 'none' : 'auto', opacity: !allowPrevNavigation ? 0.7 : 1 }}>
-                        <FaAngleLeft size={36} color="#fff" />
+                        <FaAngleLeft size={32} color="#fff" />
                     </Link>
 
                     <img src={`/images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
 
                     <Link to={`/pokemon/${Number(numeroPokemon)+1}`} style={{ pointerEvents: !allowNextNavigation ? 'none' : 'auto', opacity: !allowNextNavigation ? 0.7 : 1 }} >
-                        <FaAngleRight size={36} color="#fff" />
+                        <FaAngleRight size={32} color="#fff" />
                     </Link>
 
                 </div>
