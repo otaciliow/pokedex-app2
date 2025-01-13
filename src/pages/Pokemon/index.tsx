@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 
