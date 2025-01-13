@@ -67,6 +67,10 @@
   
   .pokeSprite {
     margin: 10rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
   
     img {
       width: 12.5rem;
