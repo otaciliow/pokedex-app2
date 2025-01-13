@@ -113,7 +113,6 @@ body {
 .poke-wrapper span {
   font-size: 1.8rem;
   font-weight: bold;
-  text-shadow: 0.07rem 0.07rem #000000;
 }
 .poke-wrapper > img {
   width: 5rem;
@@ -274,19 +273,22 @@ header > span {
   font-weight: bold;
 }
 .pokeDescHeader .pokeInfo span + span {
-  font-size: 2.6rem;
+  font-size: 3.2rem;
 }
 .pokeDescHeader .pokeTypes {
-  max-width: 5.5rem;
   margin-top: 0.2rem;
 }
 .pokeDescHeader .pokeTypes img {
-  max-width: 2rem;
+  max-width: 2.6rem;
   border-radius: 50%;
 }
 
 .pokeSprite {
   margin: 10rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
 }
 .pokeSprite img {
   width: 12.5rem;
