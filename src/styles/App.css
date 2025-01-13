@@ -113,7 +113,6 @@ body {
 .poke-wrapper span {
   font-size: 1.8rem;
   font-weight: bold;
-  text-shadow: 0.07rem 0.07rem #000000;
 }
 .poke-wrapper > img {
   width: 5rem;
