@@ -34,7 +34,7 @@ export function Pokemon() {
         const fetchedPokemon = sessionStorage.getItem('@pokedex-app');
 
         function setPokemonInfos(pokemon: IPokemonsProps) {
-            setNumeroPokemon(pokemon.id.toString());
+            setNumeroPokemon(`${pokemon.id}`);
             setNomePokemon(pokemon.nome);
             setTipoPokemon1(pokemon.tipo1);
             setNomeTipoSlug1(slugify(`${pokemon.tipo1}`, { lower: true, strict: true }));
