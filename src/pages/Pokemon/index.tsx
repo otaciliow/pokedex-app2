@@ -41,17 +41,10 @@ export function Pokemon() {
             setTipoPokemon2(pokemon.tipo2 ? pokemon.tipo2 : '');
             setNomeTipoSlug2(slugify(`${pokemon.tipo2}`, { lower: true, strict: true }))
             setDescricaoPokemon(pokemon.descricao ? pokemon.descricao : '');
+
+            setIsLoading(false);
         }
 
-        if (fetchedPokemon) {
-            let pokemons = JSON.parse(fetchedPokemon);
-            let targetPokemon: IPokemonsProps =  pokemons.find((obj: IPokemonsProps) => Number(obj.id) === Number(pokemonParams.id));
-            setPokemonInfos(targetPokemon);
-            setIsLoading(false);
-        } else {
-            loadPokemon()
-        }
-        
         function loadPokemon() {
             const docRef = doc(db, 'Kanto', `${pokemonParams.id}`);
             getDoc(docRef)
@@ -60,11 +53,23 @@ export function Pokemon() {
                     setPokemonInfos(snapshot.data() as IPokemonsProps);
                 }
             })
+            .then(() => {
+                setIsLoading(false);
+            })
             .catch(e => {
                 console.log(`Pokémon não encontrado... Erro: ${e}`)
             })
-            setIsLoading(false);
         }
+
+        if (fetchedPokemon) {
+            let pokemons = JSON.parse(fetchedPokemon);
+            let targetPokemon: IPokemonsProps =  pokemons.find((obj: IPokemonsProps) => Number(obj.id) === Number(pokemonParams.id));
+
+            targetPokemon ? setPokemonInfos(targetPokemon) : loadPokemon();
+        } else {
+            loadPokemon()
+        }
+        
 
         Number(pokemonParams.id) <= 1 ? setAllowPrevNavigation(false) : setAllowPrevNavigation(true);
         Number(pokemonParams.id) >= 151 ? setAllowNextNavigation(false) : setAllowNextNavigation(true);
