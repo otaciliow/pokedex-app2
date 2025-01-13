@@ -10,6 +10,8 @@ import returnIcon from '../../assets/images/icons/ireturn.svg';
 import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
 import { LoadingBanner } from '../../components/LoadingBanner';
 
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+
 export function Pokemon() {
 
     const pokemonParams = useParams();
@@ -60,7 +62,7 @@ export function Pokemon() {
             })
             setIsLoading(false);
         }
-    }, [])
+    }, [pokemonParams])
 
     return (
         <main className="container">
@@ -74,7 +76,7 @@ export function Pokemon() {
                         <span>{`# ${numeroPokemon}`}</span>
                         <span>{nomePokemon}</span>
                         <div className="pokeTypes">
-                        { nomeTipoSlug1 && nomeTipoSlug2 &&
+                        { nomeTipoSlug1 &&
                         <img src={`/images/tipos/${nomeTipoSlug1}.svg`} alt={`Icone de tipo ${nomeTipoSlug1}`} className={`${nomeTipoSlug1}`} />
                         }
                         { (tipoPokemon2 !== '') ? (
@@ -84,7 +86,17 @@ export function Pokemon() {
                     </div>
                 </div>
                 <div className="pokeSprite">
+                    { Number(numeroPokemon) > 1 && 
+                        <Link to={`/pokemon/${Number(numeroPokemon)-1}`} >
+                            <FaAngleLeft size={18} color="#fff" />
+                        </Link>
+                    }
                     <img src={`/images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
+                    { Number(numeroPokemon) < 151 && 
+                        <Link to={`/pokemon/${Number(numeroPokemon)+1}`} >
+                            <FaAngleRight size={18} color="#fff" />
+                        </Link>
+                    }
                 </div>
                 <div className="pokeTypesNames">
                     <span>Tipo(s):&nbsp;</span>
