@@ -106,7 +106,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 5.5rem;
+  gap: 2.5rem;
   height: 100%;
   width: 100%;
 }
@@ -115,7 +115,10 @@ body {
   font-weight: bold;
 }
 .poke-wrapper > img {
-  width: 5rem;
+  width: 7rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+  aspect-ratio: 2/2;
 }
 
 .pokeTypes {
@@ -304,6 +307,20 @@ header > span {
   font-size: 2.4rem;
   text-align: justify;
   padding: 1.1rem;
+  position: relative;
+}
+.pokeDescription button {
+  position: absolute;
+  right: 1.6rem;
+  top: -3rem;
+  background-color: #121212;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem;
 }
 
 @media screen and (min-width: 640px) {
