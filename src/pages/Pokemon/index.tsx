@@ -11,6 +11,7 @@ import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
 import { LoadingBanner } from '../../components/LoadingBanner';
 
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import { AiFillSound } from "react-icons/ai";
 
 export function Pokemon() {
 
@@ -73,8 +74,20 @@ export function Pokemon() {
 
         Number(pokemonParams.id) <= 1 ? setAllowPrevNavigation(false) : setAllowPrevNavigation(true);
         Number(pokemonParams.id) >= 151 ? setAllowNextNavigation(false) : setAllowNextNavigation(true);
-
+        
+        window.speechSynthesis.cancel();
+        
     }, [pokemonParams]);
+    
+    function handleSpeakText() {
+        const utterance = new SpeechSynthesisUtterance(descricaoPokemon);
+        utterance.lang = "pt-BR";
+        utterance.rate = 3;
+        utterance.pitch = 0.1;
+        utterance.volume = 0.2;
+
+        window.speechSynthesis.speak(utterance);
+    }
 
     return (
         <main className="container">
@@ -118,6 +131,11 @@ export function Pokemon() {
                     ) : (<></>)}
                 </div>
                 <div className="pokeDescription">
+                    { descricaoPokemon !== '' && (
+                        <button onClick={handleSpeakText}>
+                            <AiFillSound size={16} color="#FFF" />
+                        </button>
+                    )}
                     <p>{descricaoPokemon}</p>
                 </div>
             </div>
