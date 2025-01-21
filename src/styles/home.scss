@@ -109,7 +109,7 @@ $fada: #d685ad;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 5.5rem;
+    gap: 2.5rem;
     height: 100%;
     width: 100%;
   
@@ -120,7 +120,9 @@ $fada: #d685ad;
   
     > img {
       // margin-right: 20%;
-      width: 5rem;
+      width: 7rem;
+      object-fit: contain;
+      aspect-ratio: 2/2;
     }
   }
   
