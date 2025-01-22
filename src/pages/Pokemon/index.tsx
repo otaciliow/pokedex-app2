@@ -79,7 +79,7 @@ export function Pokemon() {
         utterance.lang = "pt-BR";
         utterance.rate = 3;
         utterance.pitch = 0.1;
-        utterance.volume = 0.2;
+        utterance.volume = 0.5;
 
         window.speechSynthesis.speak(utterance);
     }
