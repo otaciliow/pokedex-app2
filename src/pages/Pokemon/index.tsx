@@ -92,63 +92,66 @@ export function Pokemon() {
 
     return (
         <main className="container">
-            { targetPokemon ? (
-                <div className="pokemon-page-wrapper">
-                    <LoadingBanner status={isLoading} />
-                    <div className="pokeDescHeader">
-                        <Link to="/" className="return-button">
-                            <img src={returnIcon} alt="Ícone de retorno" />
-                        </Link>
-                        <div className="pokeInfo">
-                            <span>{`# ${targetPokemon.id}`}</span>
-                            <span>{targetPokemon.nome}</span>
-                            <div className="pokeTypes">
-                            { targetPokemon.tipo1 &&
-                            <img src={`/images/tipos/${handleSlug(targetPokemon.tipo1)}.svg`} alt={`Icone de tipo ${handleSlug(targetPokemon.tipo1)}`} className={`${handleSlug(targetPokemon.tipo1)}`} />
-                            }
-                            { (targetPokemon.tipo2 !== null) ? (
-                                <img src={`/images/tipos/${handleSlug(targetPokemon.tipo2)}.svg`} alt={`Icone de tipo ${handleSlug(targetPokemon.tipo2)}`} className={`${handleSlug(targetPokemon.tipo2)}`} />
-                            ) : (<></>) }
+            <div className="pokemon-page-wrapper">
+                <LoadingBanner status={isLoading} />
+                { targetPokemon ? (
+                    <>
+                        <div className="pokeDescHeader">
+                            <Link to="/" className="return-button">
+                                <img src={returnIcon} alt="Ícone de retorno" />
+                                <span>Voltar</span>
+                            </Link>
+                            <div className="pokeInfo">
+                                <span>{`# ${targetPokemon.id}`}</span>
+                                <span>{targetPokemon.nome}</span>
+                                <div className="pokeTypes">
+                                { targetPokemon.tipo1 &&
+                                <img src={`/images/tipos/${handleSlug(targetPokemon.tipo1)}.svg`} alt={`Icone de tipo ${handleSlug(targetPokemon.tipo1)}`} className={`${handleSlug(targetPokemon.tipo1)}`} />
+                                }
+                                { (targetPokemon.tipo2 !== null) ? (
+                                    <img src={`/images/tipos/${handleSlug(targetPokemon.tipo2)}.svg`} alt={`Icone de tipo ${handleSlug(targetPokemon.tipo2)}`} className={`${handleSlug(targetPokemon.tipo2)}`} />
+                                ) : (<></>) }
+                            </div>
+                            </div>
                         </div>
+                        <div className="pokeSprite">
+
+                            <Link to={`/pokemon/${Number(targetPokemon.id)-1}`} style={{ pointerEvents: !allowPrevNavigation ? 'none' : 'auto', opacity: !allowPrevNavigation ? 0.7 : 1 }}>
+                                <FaAngleLeft size={32} color="#fff" />
+                            </Link>
+
+                            <img src={`/images/pokemons/${targetPokemon.id}.gif`} alt={`Imagem de um ${targetPokemon.nome}`} />
+
+                            <Link to={`/pokemon/${Number(targetPokemon.id)+1}`} style={{ pointerEvents: !allowNextNavigation ? 'none' : 'auto', opacity: !allowNextNavigation ? 0.7 : 1 }} >
+                                <FaAngleRight size={32} color="#fff" />
+                            </Link>
+
                         </div>
-                    </div>
-                    <div className="pokeSprite">
-
-                        <Link to={`/pokemon/${Number(targetPokemon.id)-1}`} style={{ pointerEvents: !allowPrevNavigation ? 'none' : 'auto', opacity: !allowPrevNavigation ? 0.7 : 1 }}>
-                            <FaAngleLeft size={32} color="#fff" />
+                        <div className="pokeTypesNames">
+                            <span>Tipo(s):&nbsp;</span>
+                            <span>{targetPokemon.tipo1}</span>
+                            {(targetPokemon.tipo2 !== null) ? (
+                                <span> / {targetPokemon.tipo2}</span>
+                            ) : (<></>)}
+                        </div>
+                        <div className="pokeDescription">
+                            { targetPokemon.descricao !== '' && (
+                                <button onClick={handleSpeakText}>
+                                    <AiFillSound size={16} color="#FFF" />
+                                </button>
+                            )}
+                            <p>{targetPokemon.descricao}</p>
+                        </div>
+                    </>
+                ) : (
+                    <div className="pokemon-page-wrapper">
+                        <h1 className="page-title">Ops, parece que esse pokémon ainda não foi registrado!</h1>
+                        <Link to="/" className="error-return-button">
+                            Voltar para a página inicial
                         </Link>
-
-                        <img src={`/images/pokemons/${targetPokemon.id}.gif`} alt={`Imagem de um ${targetPokemon.nome}`} />
-
-                        <Link to={`/pokemon/${Number(targetPokemon.id)+1}`} style={{ pointerEvents: !allowNextNavigation ? 'none' : 'auto', opacity: !allowNextNavigation ? 0.7 : 1 }} >
-                            <FaAngleRight size={32} color="#fff" />
-                        </Link>
-
                     </div>
-                    <div className="pokeTypesNames">
-                        <span>Tipo(s):&nbsp;</span>
-                        <span>{targetPokemon.tipo1}</span>
-                        {(targetPokemon.tipo2 !== null) ? (
-                            <span> / {targetPokemon.tipo2}</span>
-                        ) : (<></>)}
-                    </div>
-                    <div className="pokeDescription">
-                        { targetPokemon.descricao !== '' && (
-                            <button onClick={handleSpeakText}>
-                                <AiFillSound size={16} color="#FFF" />
-                            </button>
-                        )}
-                        <p>{targetPokemon.descricao}</p>
-                    </div>
-                </div>
-            ) : (
-                <div className="pokemon-page-wrapper">
-                    <h1 className="page-title">Ops, parece que esse pokémon ainda não foi registrado!</h1>
-                    <Link to="/" className="error-return-button">
-                        Voltar para a página inicial
-                    </Link>
-                </div>
-            )}
+                ) }
+            </div>
         </main>
     )
 }
