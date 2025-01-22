@@ -242,6 +242,25 @@ header > span {
 .pokemon-page-wrapper .loading-banner img {
   position: initial;
 }
+.pokemon-page-wrapper .page-title {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.pokemon-page-wrapper .error-return-button {
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-radius: 0.8rem;
+  border: none;
+  font-size: 1.6rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: #000;
+  transition: all ease 0.6s;
+}
+.pokemon-page-wrapper .error-return-button:hover {
+  transform: scale(1.05);
+}
 
 .pokeDescHeader {
   height: 10rem;
@@ -250,20 +269,24 @@ header > span {
   align-items: flex-start;
   flex-direction: column;
 }
-.pokeDescHeader button {
-  background: transparent;
-  border: none;
+.pokeDescHeader .return-button {
   margin-bottom: 2rem;
-  border-radius: 50%;
-  background: #4d4d4d;
   padding: 0.3rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 1rem;
 }
-.pokeDescHeader button:hover {
+.pokeDescHeader .return-button:hover {
   filter: brightness(0.8);
 }
-.pokeDescHeader button img {
-  width: 3.5rem;
+.pokeDescHeader .return-button img {
+  width: 2.8rem;
+}
+.pokeDescHeader .return-button span {
+  font-size: 1.4rem;
+  color: #fff;
 }
 .pokeDescHeader .pokeInfo {
   margin-left: 10%;

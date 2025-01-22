@@ -19,14 +19,7 @@ export function Pokemon() {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [numeroPokemon, setNumeroPokemon] = useState("");
-    const [nomePokemon, setNomePokemon] = useState("");
-    const [tipoPokemon1, setTipoPokemon1] = useState("");
-    const [tipoPokemon2, setTipoPokemon2] = useState("");
-    const [descricaoPokemon, setDescricaoPokemon] = useState("");
-
-    const [nomeTipoSlug1, setNomeTipoSlug1] = useState("");
-    const [nomeTipoSlug2, setNomeTipoSlug2] = useState("");
+    const [targetPokemon, setTargetPokemon] = useState<IPokemonsProps>();
 
     const [allowPrevNavigation, setAllowPrevNavigation] = useState(true);
     const [allowNextNavigation, setAllowNextNavigation] = useState(true);
@@ -35,14 +28,16 @@ export function Pokemon() {
         const fetchedPokemon = sessionStorage.getItem('@pokedex-app');
 
         function setPokemonInfos(pokemon: IPokemonsProps) {
-            setNumeroPokemon(`${pokemon.id}`);
-            setNomePokemon(pokemon.nome);
-            setTipoPokemon1(pokemon.tipo1);
-            setNomeTipoSlug1(slugify(`${pokemon.tipo1}`, { lower: true, strict: true }));
-            setTipoPokemon2(pokemon.tipo2 ? pokemon.tipo2 : '');
-            setNomeTipoSlug2(slugify(`${pokemon.tipo2}`, { lower: true, strict: true }))
-            setDescricaoPokemon(pokemon.descricao ? pokemon.descricao : '');
 
+            setTargetPokemon({
+                id: pokemon.id,
+                nome: pokemon.nome,
+                tipo1: pokemon.tipo1,
+                tipo2: pokemon.tipo2,
+                descricao: pokemon.descricao
+            });
+
+            
             setIsLoading(false);
         }
 
@@ -80,7 +75,7 @@ export function Pokemon() {
     }, [pokemonParams]);
     
     function handleSpeakText() {
-        const utterance = new SpeechSynthesisUtterance(descricaoPokemon);
+        const utterance = new SpeechSynthesisUtterance(targetPokemon?.descricao);
         utterance.lang = "pt-BR";
         utterance.rate = 3;
         utterance.pitch = 0.1;
@@ -89,55 +84,73 @@ export function Pokemon() {
         window.speechSynthesis.speak(utterance);
     }
 
+    function handleSlug(text: string) {
+        const slug = slugify(`${text}`, { lower: true, strict: true });
+
+        return slug;
+    }
+
     return (
         <main className="container">
             <div className="pokemon-page-wrapper">
                 <LoadingBanner status={isLoading} />
-                <div className="pokeDescHeader">
-                    <Link to="/">
-                        <img src={returnIcon} alt="Ícone de retorno" />
-                    </Link>
-                    <div className="pokeInfo">
-                        <span>{`# ${numeroPokemon}`}</span>
-                        <span>{nomePokemon}</span>
-                        <div className="pokeTypes">
-                        { nomeTipoSlug1 &&
-                        <img src={`/images/tipos/${nomeTipoSlug1}.svg`} alt={`Icone de tipo ${nomeTipoSlug1}`} className={`${nomeTipoSlug1}`} />
-                        }
-                        { (tipoPokemon2 !== '') ? (
-                            <img src={`/images/tipos/${nomeTipoSlug2}.svg`} alt={`Icone de tipo ${nomeTipoSlug2}`} className={`${nomeTipoSlug2}`} />
-                        ) : (<></>) }
+                { targetPokemon ? (
+                    <>
+                        <div className="pokeDescHeader">
+                            <Link to="/" className="return-button">
+                                <img src={returnIcon} alt="Ícone de retorno" />
+                                <span>Voltar</span>
+                            </Link>
+                            <div className="pokeInfo">
+                                <span>{`# ${targetPokemon.id}`}</span>
+                                <span>{targetPokemon.nome}</span>
+                                <div className="pokeTypes">
+                                { targetPokemon.tipo1 &&
+                                <img src={`/images/tipos/${handleSlug(targetPokemon.tipo1)}.svg`} alt={`Icone de tipo ${handleSlug(targetPokemon.tipo1)}`} className={`${handleSlug(targetPokemon.tipo1)}`} />
+                                }
+                                { (targetPokemon.tipo2 !== null) ? (
+                                    <img src={`/images/tipos/${handleSlug(targetPokemon.tipo2)}.svg`} alt={`Icone de tipo ${handleSlug(targetPokemon.tipo2)}`} className={`${handleSlug(targetPokemon.tipo2)}`} />
+                                ) : (<></>) }
+                            </div>
+                            </div>
+                        </div>
+                        <div className="pokeSprite">
+
+                            <Link to={`/pokemon/${Number(targetPokemon.id)-1}`} style={{ pointerEvents: !allowPrevNavigation ? 'none' : 'auto', opacity: !allowPrevNavigation ? 0.7 : 1 }}>
+                                <FaAngleLeft size={32} color="#fff" />
+                            </Link>
+
+                            <img src={`/images/pokemons/${targetPokemon.id}.gif`} alt={`Imagem de um ${targetPokemon.nome}`} />
+
+                            <Link to={`/pokemon/${Number(targetPokemon.id)+1}`} style={{ pointerEvents: !allowNextNavigation ? 'none' : 'auto', opacity: !allowNextNavigation ? 0.7 : 1 }} >
+                                <FaAngleRight size={32} color="#fff" />
+                            </Link>
+
+                        </div>
+                        <div className="pokeTypesNames">
+                            <span>Tipo(s):&nbsp;</span>
+                            <span>{targetPokemon.tipo1}</span>
+                            {(targetPokemon.tipo2 !== null) ? (
+                                <span> / {targetPokemon.tipo2}</span>
+                            ) : (<></>)}
+                        </div>
+                        <div className="pokeDescription">
+                            { targetPokemon.descricao !== '' && (
+                                <button onClick={handleSpeakText}>
+                                    <AiFillSound size={16} color="#FFF" />
+                                </button>
+                            )}
+                            <p>{targetPokemon.descricao}</p>
+                        </div>
+                    </>
+                ) : (
+                    <div className="pokemon-page-wrapper">
+                        <h1 className="page-title">Ops, parece que esse pokémon ainda não foi registrado!</h1>
+                        <Link to="/" className="error-return-button">
+                            Voltar para a página inicial
+                        </Link>
                     </div>
-                    </div>
-                </div>
-                <div className="pokeSprite">
-
-                    <Link to={`/pokemon/${Number(numeroPokemon)-1}`} style={{ pointerEvents: !allowPrevNavigation ? 'none' : 'auto', opacity: !allowPrevNavigation ? 0.7 : 1 }}>
-                        <FaAngleLeft size={32} color="#fff" />
-                    </Link>
-
-                    <img src={`/images/pokemons/${numeroPokemon}.gif`} alt={`Imagem de um ${nomePokemon}`} />
-
-                    <Link to={`/pokemon/${Number(numeroPokemon)+1}`} style={{ pointerEvents: !allowNextNavigation ? 'none' : 'auto', opacity: !allowNextNavigation ? 0.7 : 1 }} >
-                        <FaAngleRight size={32} color="#fff" />
-                    </Link>
-
-                </div>
-                <div className="pokeTypesNames">
-                    <span>Tipo(s):&nbsp;</span>
-                    <span>{tipoPokemon1}</span>
-                    {(tipoPokemon2 !== '') ? (
-                        <span> / {tipoPokemon2}</span>
-                    ) : (<></>)}
-                </div>
-                <div className="pokeDescription">
-                    { descricaoPokemon !== '' && (
-                        <button onClick={handleSpeakText}>
-                            <AiFillSound size={16} color="#FFF" />
-                        </button>
-                    )}
-                    <p>{descricaoPokemon}</p>
-                </div>
+                ) }
             </div>
         </main>
     )
