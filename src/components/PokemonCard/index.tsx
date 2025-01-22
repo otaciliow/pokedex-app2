@@ -13,7 +13,7 @@ export function PokemonCard(props: IPokemonsProps) {
             <div className="pokeInfos">
                 <span>{pokemon}</span>
                 <div className="pokeTypes">
-                    <img src={`/images/tipos/${pokeTipo1}.svg`} alt={`Icone de tipo ${pokeTipo1}`} className={`${pokeTipo1}`} />
+                    <img src={`/images/tipos/${pokeTipo1}.svg`} alt={`Icone de tipo ${pokeTipo1}`} className={`${pokeTipo1}`} loading="lazy" />
                     {pokeTipo2 !== "null" && (
                             <img src={`/images/tipos/${pokeTipo2}.svg`} alt={`Icone de tipo ${pokeTipo2}`} className={`${pokeTipo2}`} />
                         )
