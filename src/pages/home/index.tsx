@@ -59,6 +59,7 @@ export function Home() {
                 setIsLoading(false);
             })
         }
+        window.speechSynthesis.cancel();
     }, [pokemonsLimit])
 
     function handleLoadMore() {
