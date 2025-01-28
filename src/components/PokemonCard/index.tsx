@@ -1,4 +1,4 @@
-import { IPokemonsProps } from "../../shared/pokemonsProps.interface";
+import { IPokemonsProps } from "../../interfaces/pokemonsProps.interface";
 
 export function PokemonCard(props: IPokemonsProps) {
     
