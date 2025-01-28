@@ -7,7 +7,7 @@ import { db } from '../../services/firebaseconnection';
 import slugify from 'slugify';
 
 import returnIcon from '../../assets/images/icons/ireturn.svg';
-import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
+import { IPokemonsProps } from '../../interfaces/pokemonsProps.interface';
 import { LoadingBanner } from '../../components/LoadingBanner';
 
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';

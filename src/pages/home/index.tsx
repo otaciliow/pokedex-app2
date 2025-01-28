@@ -6,7 +6,7 @@ import { PokemonCard } from '../../components/PokemonCard';
 import { db } from '../../services/firebaseconnection';
 import { getDocs, collection, orderBy, query, limit } from 'firebase/firestore';
 
-import { IPokemonsProps } from '../../shared/pokemonsProps.interface';
+import { IPokemonsProps } from '../../interfaces/pokemonsProps.interface';
 
 import slugify from 'slugify';
 import { LoadingBanner } from '../../components/LoadingBanner';
